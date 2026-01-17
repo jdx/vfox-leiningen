@@ -1,10 +1,15 @@
 --- Post-install hook to set up Leiningen
 --- Downloads the lein script and organizes files properly
---- @param ctx table Context object with rootPath and version fields
+--- @param ctx table Context object with rootPath field
 function PLUGIN:PostInstall(ctx)
     local rootPath = ctx.rootPath
-    local version = ctx.version
     local http = require("http")
+
+    -- Extract version from rootPath (e.g., /path/to/installs/leiningen/2.12.0)
+    local version = rootPath:match("([^/\\]+)$")
+    if not version then
+        error("Could not extract version from rootPath: " .. rootPath)
+    end
 
     -- Create directory structure
     local binDir = rootPath .. "/bin"
