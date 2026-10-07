@@ -9,9 +9,5 @@ function PLUGIN:EnvKeys(ctx)
             key = "PATH",
             value = mainPath .. "/bin",
         },
-        {
-            key = "LEIN_HOME",
-            value = mainPath,
-        },
     }
 end
